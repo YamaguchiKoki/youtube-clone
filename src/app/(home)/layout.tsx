@@ -4,6 +4,7 @@ interface LayoutProps {
 }
 
 const Layout = ({ children }: LayoutProps) => {
+  // layout.tsxではlayoutのみ呼び出す
   return (
     <HomeLayout>
       {children}
