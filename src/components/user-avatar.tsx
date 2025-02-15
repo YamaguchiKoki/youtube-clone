@@ -2,7 +2,7 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { cn } from "@/lib/utils";
 import { cva, type VariantProps } from "class-variance-authority";
 import { UserIcon } from "lucide-react";
-
+// TODO: テンプレート化 storybook作成など
 const avatarVariants = cva("", {
   variants: {
     size: {
