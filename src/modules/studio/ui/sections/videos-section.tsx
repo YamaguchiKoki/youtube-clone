@@ -56,13 +56,13 @@ export const VideosSectionSuspense = () => {
                   <TableCell>
                     date
                   </TableCell>
-                  <TableCell>
+                  <TableCell className="text-right">
                     views
                   </TableCell>
-                  <TableCell>
+                  <TableCell className="text-right">
                     comments
                   </TableCell>
-                  <TableCell>
+                  <TableCell className="text-right">
                     likes
                   </TableCell>
                 </TableRow>
