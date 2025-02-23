@@ -41,13 +41,31 @@ interface VideoRowCardProps extends VariantProps<typeof videoRowCardVariants> {
 
 export const VideoRowCardSkelton = () => {
   return (
-    <div>
-      <Skeleton />
+    <div className={cn(videoRowCardVariants({ size: "default" }))}>
+      <div className={thumbnailVariants({ size: "default" })}>
+        <Skeleton className="aspect-video w-full h-full rounded-xl" />
+      </div>
+      <div className="flex-1 min-w-0">
+        <div className="flex justify-between gap-x-2">
+          <div className="flex-1 min-w-0">
+            <Skeleton className="h-5 w-full mb-2" />
+            <Skeleton className="h-4 w-1/3 mb-4" />
+            <div className="flex items-center gap-2 my-3">
+              <Skeleton className="h-8 w-8 rounded-full" />
+              <Skeleton className="h-4 w-24" />
+            </div>
+            <Skeleton className="h-3 w-2/3" />
+          </div>
+          <div className="flex-none">
+            <Skeleton className="h-8 w-8 rounded-full" />
+          </div>
+        </div>
+      </div>
     </div>
   )
 }
 
-export const VideoRowCard = ({ video, size, onRemove }: VideoRowCardProps) => {
+export const VideoRowCard = ({ video, size = "default", onRemove }: VideoRowCardProps) => {
   const compactViews = useMemo(() => {
     return Intl.NumberFormat("en", {
       notation: "compact",
