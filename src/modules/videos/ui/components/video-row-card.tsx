@@ -39,7 +39,7 @@ interface VideoRowCardProps extends VariantProps<typeof videoRowCardVariants> {
   onRemove?: () => void;
 }
 
-export const VideoRowCardSkelton = () => {
+export const VideoRowCardSkeleton = () => {
   return (
     <div className={cn(videoRowCardVariants({ size: "default" }))}>
       <div className={thumbnailVariants({ size: "default" })}>

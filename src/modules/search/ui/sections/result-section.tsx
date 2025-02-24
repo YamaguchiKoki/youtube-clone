@@ -6,6 +6,11 @@ import { useIsMobile } from "@/hooks/use-mobile";
 import { VideoGridCard } from "@/modules/videos/ui/components/video-grid-card";
 import { VideoRowCard } from "@/modules/videos/ui/components/video-row-card";
 import { trpc } from "@/trpc/client";
+import { Suspense } from "react";
+import { cn } from "@/lib/utils";
+import { VideoGridCardSkeleton } from "@/modules/videos/ui/components/video-grid-card";
+import { VideoRowCardSkeleton } from "@/modules/videos/ui/components/video-row-card";
+import { ErrorBoundary } from "react-error-boundary";
 
 interface ResultSectionProps {
   query: string | undefined;
@@ -13,6 +18,22 @@ interface ResultSectionProps {
 }
 
 export const ResultSection = ({
+  query,
+  categoryId,
+}: ResultSectionProps) => {
+  return (
+    <Suspense
+      key={`${query}-${categoryId}`}
+      fallback={<ResultSectionSkeleton />}
+    >
+      <ErrorBoundary fallback={<ResultSectionSkeleton />}>
+        <ResultSectionSuspense query={query} categoryId={categoryId} />
+      </ErrorBoundary>
+    </Suspense>
+  );
+};
+
+export const ResultSectionSuspense = ({
   query,
   categoryId,
 }: ResultSectionProps) => {
@@ -56,5 +77,25 @@ export const ResultSection = ({
         isFetchingNextPage={reslutQuery.isFetchingNextPage}
       />
     </>
+  )
+}
+
+export const ResultSectionSkeleton = () => {
+  const isMobile = useIsMobile();
+
+  return (
+    <div className={cn(
+      isMobile
+        ? "flex flex-col gap-4 gap-y-10"
+        : "flex flex-col gap-4"
+    )}>
+      {Array.from({ length: 10 }).map((_, index) => (
+        isMobile ? (
+          <VideoGridCardSkeleton key={index} />
+        ) : (
+          <VideoRowCardSkeleton key={index} />
+        )
+      ))}
+    </div>
   )
 }
